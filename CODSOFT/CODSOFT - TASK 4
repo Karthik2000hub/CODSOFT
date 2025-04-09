@@ -1,0 +1,53 @@
+package pack;
+import java.util.Scanner;
+
+public class CurrencyConverter {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        double usdToEur = 0.85; 
+        double usdToInr = 75.0; 
+        double eurToUsd = 1.18; 
+
+       
+        System.out.println("Currency Converter");
+        System.out.print("Enter the amount to convert: ");
+        double amount = scanner.nextDouble();
+
+        System.out.println("Select the base currency:");
+        System.out.println("1. USD");
+        System.out.println("2. EUR");
+        int baseChoice = scanner.nextInt();
+
+        System.out.println("Select the target currency:");
+        System.out.println("1. USD");
+        System.out.println("2. EUR");
+        System.out.println("3. INR");
+        int targetChoice = scanner.nextInt();
+
+        
+        double convertedAmount = 0;
+        String targetCurrency = "";
+
+        if (baseChoice == 1 && targetChoice == 2) {
+            convertedAmount = amount * usdToEur;
+            targetCurrency = "EUR";
+        } else if (baseChoice == 1 && targetChoice == 3) {
+            convertedAmount = amount * usdToInr;
+            targetCurrency = "INR";
+        } else if (baseChoice == 2 && targetChoice == 1) {
+            convertedAmount = amount * eurToUsd;
+            targetCurrency = "USD";
+        } else {
+            System.out.println("Invalid selection for currencies.");
+            return;
+        }
+
+        
+        System.out.printf("%.2f converted to %s is: %.2f %s\n", amount, (baseChoice == 1 ? "USD" : "EUR"), convertedAmount, targetCurrency);
+
+        scanner.close();
+    }
+}
