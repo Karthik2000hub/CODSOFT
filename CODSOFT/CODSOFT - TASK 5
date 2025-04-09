@@ -1,0 +1,66 @@
+package pack;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentManagementSystem {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Student> students = new ArrayList<>();
+
+        while (true) {
+            System.out.println("\nStudent Management System");
+            System.out.println("1. Add Student");
+            System.out.println("2. Remove Student");
+            System.out.println("3. Display All Students");
+            System.out.println("4. Exit");
+            System.out.print("Select an option (1-4): ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  
+
+            if (choice == 1) {  
+                System.out.print("Enter Student Name: ");
+                String name = scanner.nextLine();
+                System.out.print("Enter Roll Number: ");
+                String rollNumber = scanner.nextLine();
+                students.add(new Student(name, rollNumber));
+                System.out.println("Student added successfully.");
+            } 
+            else if (choice == 2) {  
+                System.out.print("Enter Roll Number of student to remove: ");
+                String rollNumberToRemove = scanner.nextLine();
+                boolean found = false;
+                for (Student student : students) {
+                    if (student.rollNumber.equals(rollNumberToRemove)) {
+                        students.remove(student);
+                        System.out.println("Student removed successfully.");
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    System.out.println("Student not found.");
+                }
+            }
+            else if (choice == 3) {  
+                if (students.isEmpty()) {
+                    System.out.println("No students to display.");
+                } else {
+                    System.out.println("\nList of Students:");
+                    for (Student student : students) {
+                        System.out.println("Name: " + student.name + ", Roll Number: " + student.rollNumber);
+                    }
+                }
+            }
+            else if (choice == 4) {  
+                System.out.println("Exiting the system...");
+                break;
+            }
+            else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        scanner.close();
+    }
+}
